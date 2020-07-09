@@ -6,7 +6,18 @@
     <title>Chat</title>
 </head>
 <body>
-    <div id="chat"></div>
+    <div id="chat">
+        <div class="header">
+        <h1>{{ header.toLocaleUpperCase() }}</h1>
+        <input v-model="newItem" type="text" placeholder="Добавить сообщение" @keyup.enter="saveMessage">
+                <button class="btn btn-primary" :disabled="newMessage.length === 0" @click="saveMessage">Отправить</button>
+        </div>
+        <div v-if="state === 'edit'" class="add-item-form">
+                <ul>
+                    <li v-for="message in reversedMessage" :class="{strikeout:message.purchased}" @click="togglePurchased(message)">{{ message.label }}</li>
+                </ul>
+        </div>
+    </div>
     
 <script src="https://unpkg.com/vue"></script>
 <script src="./scripts/vue.js"></script>
